@@ -1,7 +1,7 @@
 # Agentic Search for the NASA Planetary Data System
 
 An MCP server and reproducible evaluation of multistep natural-language search
-over the [NASA Planetary Data System (PDS) Registry](https://nasa-pds.github.io/pds-api/) -- the digital data archive for all of NASA's planetary missions, flight and ground-based observations, and laboratory
+over the [NASA Planetary Data System (PDS) Registry](https://pds.mcp.nasa.gov/portal/) -- the digital data archive for all of NASA's planetary missions, flight and ground-based observations, and laboratory
 experiments from the 1960s to the present. With more than **1.85 petabytes** from **70+
 missions, 4,500 datasets, and 700 instruments** all peer-reviewed by JPL and other research institutions.
 
