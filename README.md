@@ -1,29 +1,26 @@
 # Agentic Search for the NASA Planetary Data System
 
 An MCP server and reproducible evaluation of multistep natural-language search
-over the [NASA Planetary Data System (PDS) Registry](https://nasa-pds.github.io/pds-api/).
+over the [NASA Planetary Data System (PDS) Registry](https://nasa-pds.github.io/pds-api/) -- the digital data archive for all of NASA's planetary missions, flight and ground-based observations, and laboratory
+experiments from the 1960s to the present. With more than **1.85 petabytes** from **70+
+missions, 4,500 datasets, and 700 instruments** all peer-reviewed by JPL and other research institutions.
 
-**[Evaluation](#evaluation-study)** · **[Results](#results)** ·
-**[Benchmark and artifacts](#benchmark-and-reproducibility)** ·
-**[MCP server](#mcp-server)** · **[Development guide](DEVELOPMENT.md)**
+**[Evaluation study](#evaluation-study) · [Results](#results) · [Benchmark and reproducibility](#benchmark-and-reproducibility) · [MCP server](#mcp-server) · [Development guide](DEVELOPMENT.md)**
+
+https://github.com/user-attachments/assets/1d6b7035-c07a-4ca3-8bd2-9c19d68c3d5c
 
 ## Abstract
 
-The NASA Planetary Data System archives planetary-science data using the PDS4
-information model. Searching the Registry often requires exact ontology field
-names and context identifiers for investigations, targets, instruments, and
-instrument hosts. This repository exposes those operations through a FastMCP
-server so that a language-model agent can resolve PDS entities, construct
-filters, and retrieve matching collections from a natural-language request.
+The NASA Planetary Data System (PDS) serves as a high-quality, hand-curated data source for the whole community of planetary research. However, searching the PDS Registry is difficult, requiring knowledge of exact PDS4 ontology fields and context identifiers to manually construct queries for its public search APIs.  The research chain of scientific question -> experimentation -> findings/results is thus bottlenecked by current PDS search capabilities.
 
-We evaluated whether iterative tool use improves identifier-set retrieval on a
-300-question, query-first benchmark validated against the live PDS Search API.
-Using the same GPT-5.6 Luna model, we compared closed-book generation, access to
-one MCP call, and multistep MCP search. Multistep search achieved **98.02% macro
-F1** and **95.67% exact result-set match**, compared with 12.29% and 8.33% for
-the single-call condition and 0.33% on both metrics without PDS access. These
-results show that iterative entity resolution and tool use were necessary for
-reliable retrieval on this synthetic, live-validated benchmark.
+We introduce **PDS-MCP**, an agentic search interface on top of the NASA PDS Registry.
+From natural language questions, our agent can iteratively resolve PDS entities, inspect relationships, construct valid filters, and retrieve matching products autonomously constructing PDS API queries with no manual human intervention. We evaluate this on our 300-question benchmark, constructed from our scalable data engine, achieving **98.02% macro F1** and **95.67%
+exact result-set match** on our full system, compared with 12.29% and 8.33% for single-call MCP and
+0.33% on both metrics without PDS access, demonstrating that it can reliably bridge
+natural-language questions and structured PDS retrieval.
+
+By releasing **PDS-MCP** publically, we aim to support the researchers of the Planetary Data Science community by making it easier to access NASA PDS data. Our goal is to provide enhanced search capabilities that enable more effective data exploration and improve accessibility for future research endeavors.
+
 
 ## Evaluation study
 
@@ -168,4 +165,3 @@ Code is released under the [MIT License](LICENSE).
 - PDS Registry API: contact `pds-operator@jpl.nasa.gov` or open an issue in the
   [PDS API repository](https://github.com/NASA-PDS/pds-api).
 - This server and study: open an issue in this repository.
-
