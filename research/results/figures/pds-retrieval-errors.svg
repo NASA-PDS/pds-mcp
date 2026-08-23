@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img">
+<title>Identifier-level retrieval errors</title><desc>False positives and false negatives across the three same-model conditions (log scale).</desc>
+<style>text{font-family:Arial,sans-serif;fill:#172033}.title{font-size:28px;font-weight:700}.sub{font-size:15px;fill:#526070}.label{font-size:16px}.value{font-size:14px;font-weight:700}.grid{stroke:#dfe4ea;stroke-width:1}.axis{stroke:#8792a2;stroke-width:1.5}</style>
+<rect width="100%" height="100%" fill="#fff"/>
+<text class="title" x="70" y="55">Identifier-level retrieval errors</text>
+<text class="sub" x="70" y="82">False positives and false negatives across the three same-model conditions (log scale).</text>
+<line class="grid" x1="125" y1="570.0" x2="1120" y2="570.0"/>
+<text class="label" x="55" y="575.0">10^0</text>
+<line class="grid" x1="125" y1="470.0" x2="1120" y2="470.0"/>
+<text class="label" x="55" y="475.0">10^1</text>
+<line class="grid" x1="125" y1="370.0" x2="1120" y2="370.0"/>
+<text class="label" x="55" y="375.0">10^2</text>
+<line class="grid" x1="125" y1="270.0" x2="1120" y2="270.0"/>
+<text class="label" x="55" y="275.0">10^3</text>
+<line class="grid" x1="125" y1="170.0" x2="1120" y2="170.0"/>
+<text class="label" x="55" y="175.0">10^4</text>
+<rect x="230" y="420.9" width="58" height="149.1" rx="4" fill="#ef8a62"/>
+<text class="value" text-anchor="middle" x="259" y="412.9">31</text>
+<rect x="305" y="186.5" width="58" height="383.5" rx="4" fill="#b2182b"/>
+<text class="value" text-anchor="middle" x="334" y="178.5">6,841</text>
+<text class="label" text-anchor="middle" x="285" y="615">Baseline</text>
+<rect x="545" y="430.2" width="58" height="139.8" rx="4" fill="#ef8a62"/>
+<text class="value" text-anchor="middle" x="574" y="422.2">25</text>
+<rect x="620" y="194.2" width="58" height="375.8" rx="4" fill="#b2182b"/>
+<text class="value" text-anchor="middle" x="649" y="186.2">5,731</text>
+<text class="label" text-anchor="middle" x="600" y="615">Single-call MCP</text>
+<rect x="860" y="479.7" width="58" height="90.3" rx="4" fill="#ef8a62"/>
+<text class="value" text-anchor="middle" x="889" y="471.7">8</text>
+<rect x="935" y="373.2" width="58" height="196.8" rx="4" fill="#b2182b"/>
+<text class="value" text-anchor="middle" x="964" y="365.2">93</text>
+<text class="label" text-anchor="middle" x="915" y="615">Multistep MCP</text>
+<rect x="430" y="660" width="16" height="16" fill="#ef8a62"/><text class="label" x="453" y="674">False positives</text>
+<rect x="590" y="660" width="16" height="16" fill="#b2182b"/><text class="label" x="613" y="674">False negatives</text>
+</svg>

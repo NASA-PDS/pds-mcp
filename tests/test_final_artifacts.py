@@ -7,7 +7,7 @@ from pds_research.benchmark import read_jsonl
 ROOT = Path(__file__).parents[1]
 DATASET = ROOT / "research/data/main-300-live.jsonl"
 PREDICTIONS = (
-    "codex-closed-book-main-300-gpt-5.6-luna.jsonl",
+    "codex-baseline-main-300-gpt-5.6-luna.jsonl",
     "codex-live-single-call-main-300-gpt-5.6-luna.jsonl",
     "codex-live-main-300-gpt-5.6-luna.jsonl",
 )

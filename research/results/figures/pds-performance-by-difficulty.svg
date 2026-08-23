@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img">
+<title>Full multistep MCP system by question difficulty</title><desc>Macro F1 and exact result-set match; sample size is shown beneath each group.</desc>
+<style>text{font-family:Arial,sans-serif;fill:#172033}.title{font-size:28px;font-weight:700}.sub{font-size:15px;fill:#526070}.label{font-size:16px}.value{font-size:14px;font-weight:700}.grid{stroke:#dfe4ea;stroke-width:1}.axis{stroke:#8792a2;stroke-width:1.5}</style>
+<rect width="100%" height="100%" fill="#fff"/>
+<text class="title" x="70" y="55">Full multistep MCP system by question difficulty</text>
+<text class="sub" x="70" y="82">Macro F1 and exact result-set match; sample size is shown beneath each group.</text>
+<line class="grid" x1="120" y1="570.0" x2="1130" y2="570.0"/>
+<text x="70" y="575.0" class="label">0%</text>
+<line class="grid" x1="120" y1="482.0" x2="1130" y2="482.0"/>
+<text x="70" y="487.0" class="label">20%</text>
+<line class="grid" x1="120" y1="394.0" x2="1130" y2="394.0"/>
+<text x="70" y="399.0" class="label">40%</text>
+<line class="grid" x1="120" y1="306.0" x2="1130" y2="306.0"/>
+<text x="70" y="311.0" class="label">60%</text>
+<line class="grid" x1="120" y1="218.0" x2="1130" y2="218.0"/>
+<text x="70" y="223.0" class="label">80%</text>
+<line class="grid" x1="120" y1="130.0" x2="1130" y2="130.0"/>
+<text x="70" y="135.0" class="label">100%</text>
+<line class="axis" x1="120" y1="130" x2="120" y2="570"/>
+<rect x="175" y="138.7" width="42" height="431.3" rx="4" fill="#1677ff"/>
+<text class="value" text-anchor="middle" x="196" y="130.7">98.0%</text>
+<rect x="230" y="159.3" width="42" height="410.7" rx="4" fill="#16a085"/>
+<text class="value" text-anchor="middle" x="251" y="151.3">93.3%</text>
+<text class="label" text-anchor="middle" x="224" y="605">Single-constraint</text>
+<text class="sub" text-anchor="middle" x="224" y="630">n=75</text>
+<rect x="365" y="138.7" width="42" height="431.3" rx="4" fill="#1677ff"/>
+<text class="value" text-anchor="middle" x="386" y="130.7">98.0%</text>
+<rect x="420" y="145.6" width="42" height="424.4" rx="4" fill="#16a085"/>
+<text class="value" text-anchor="middle" x="441" y="137.6">96.4%</text>
+<text class="label" text-anchor="middle" x="414" y="605">Multihop questions</text>
+<text class="sub" text-anchor="middle" x="414" y="630">n=225</text>
+<rect x="555" y="138.7" width="42" height="431.3" rx="4" fill="#1677ff"/>
+<text class="value" text-anchor="middle" x="576" y="130.7">98.0%</text>
+<rect x="610" y="159.3" width="42" height="410.7" rx="4" fill="#16a085"/>
+<text class="value" text-anchor="middle" x="631" y="151.3">93.3%</text>
+<text class="label" text-anchor="middle" x="604" y="605">1 constraint</text>
+<text class="sub" text-anchor="middle" x="604" y="630">n=75</text>
+<rect x="745" y="134.2" width="42" height="435.8" rx="4" fill="#1677ff"/>
+<text class="value" text-anchor="middle" x="766" y="126.2">99.1%</text>
+<rect x="800" y="137.9" width="42" height="432.1" rx="4" fill="#16a085"/>
+<text class="value" text-anchor="middle" x="821" y="129.9">98.2%</text>
+<text class="label" text-anchor="middle" x="794" y="605">2 constraints</text>
+<text class="sub" text-anchor="middle" x="794" y="630">n=112</text>
+<rect x="935" y="143.3" width="42" height="426.7" rx="4" fill="#1677ff"/>
+<text class="value" text-anchor="middle" x="956" y="135.3">97.0%</text>
+<rect x="990" y="153.4" width="42" height="416.6" rx="4" fill="#16a085"/>
+<text class="value" text-anchor="middle" x="1011" y="145.4">94.7%</text>
+<text class="label" text-anchor="middle" x="984" y="605">3 constraints</text>
+<text class="sub" text-anchor="middle" x="984" y="630">n=113</text>
+<rect x="430" y="660" width="16" height="16" fill="#1677ff"/><text class="label" x="453" y="674">Macro F1</text>
+<rect x="565" y="660" width="16" height="16" fill="#16a085"/><text class="label" x="588" y="674">Exact match</text>
+</svg>

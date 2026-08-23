@@ -1,4 +1,4 @@
 condition,n,macro_precision,macro_recall,macro_f1,exact_match,micro_precision,micro_recall,micro_f1,true_positives,false_positives,false_negatives,partial_nonexact,zero_overlap,failures_or_abstentions,protocol_violations,mean_tool_calls,mean_latency_seconds,input_tokens,output_tokens
-Closed book,300,0.003333,0.003333,0.003333,0.003333,0.031250,0.000146,0.000291,1,31,6841,0,299,0,0,0.000000,7.998251,4165488,83660
+Baseline,300,0.003333,0.003333,0.003333,0.003333,0.031250,0.000146,0.000291,1,31,6841,0,299,0,0,0.000000,7.998251,4165488,83660
 Single-call MCP,300,0.136226,0.117127,0.122886,0.083333,0.977993,0.162379,0.278516,1111,25,5731,17,258,36,2,1.006667,29.863343,16715650,325737
 Multistep MCP,300,0.981778,0.979684,0.980176,0.956667,0.998816,0.986407,0.992573,6749,8,93,8,5,1,0,5.276667,47.238023,44106997,405649
