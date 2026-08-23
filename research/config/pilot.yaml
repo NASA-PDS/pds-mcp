@@ -1,0 +1,46 @@
+study:
+  name: pds-agentic-search-pilot
+  seed: 20260822
+  benchmark_size: 30
+  repetitions: 3
+  frozen_snapshot: null
+
+candidate_systems:
+  - deterministic_api
+  - single_pass_structured_query
+  - structured_tool_loop
+  - react_tool_loop
+  - native_context_graph
+
+fixed_controls:
+  result_limit: 100
+  max_tool_steps: 5
+  timeout_seconds: 60
+  retry_count: 1
+  model_snapshot: null
+  temperature: 0
+
+primary_metrics:
+  - macro_f1
+  - exact_result_set
+  - recall_at_10
+  - precision_at_10
+
+secondary_metrics:
+  - entity_resolution_f1
+  - canonical_query_validity
+  - tool_argument_validity
+  - tool_calls
+  - latency_seconds
+  - input_tokens
+  - output_tokens
+  - estimated_cost_usd
+
+selection:
+  minimum_exact_success: 0.50
+  tie_breakers:
+    - macro_f1
+    - run_to_run_consistency
+    - lower_cost
+    - lower_complexity
+

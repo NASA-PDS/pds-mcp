@@ -1,0 +1,43 @@
+{
+  "benchmark": "main-300-live.jsonl",
+  "model": "gpt-5.6-luna",
+  "system": "codex_live_pds_mcp_multistep",
+  "questions": 300,
+  "tool_calls": {
+    "mean": 5.276666666666666,
+    "median": 5.0,
+    "minimum": 1,
+    "maximum": 15,
+    "distribution": {
+      "1": 3,
+      "2": 22,
+      "3": 35,
+      "4": 64,
+      "5": 60,
+      "6": 36,
+      "7": 36,
+      "8": 18,
+      "9": 11,
+      "10": 8,
+      "11": 3,
+      "12": 3,
+      "15": 1
+    }
+  },
+  "exact_match_by_tool_calls": {
+    "1": {"n": 3, "exact_match": 1.0},
+    "2": {"n": 22, "exact_match": 1.0},
+    "3": {"n": 35, "exact_match": 0.9714285714285714},
+    "4": {"n": 64, "exact_match": 0.984375},
+    "5": {"n": 60, "exact_match": 1.0},
+    "6": {"n": 36, "exact_match": 1.0},
+    "7": {"n": 36, "exact_match": 0.9444444444444444},
+    "8": {"n": 18, "exact_match": 0.7777777777777778},
+    "9": {"n": 11, "exact_match": 0.9090909090909091},
+    "10": {"n": 8, "exact_match": 0.875},
+    "11": {"n": 3, "exact_match": 0.6666666666666666},
+    "12": {"n": 3, "exact_match": 0.3333333333333333},
+    "15": {"n": 1, "exact_match": 1.0}
+  },
+  "interpretation": "Tool-call count is observational, not randomized. Longer trajectories may indicate intrinsically harder questions or recovery attempts, so the association must not be interpreted as a causal effect of additional calls. Small groups at high call counts have substantial uncertainty."
+}

@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pds-mcp-server"
+version = "0.2.0"
+description = "NASA PDS MCP server and reproducible agentic-search research harness"
+requires-python = ">=3.13"
+dependencies = [
+  "fastmcp>=0.1.0",
+  "httpx>=0.25.0",
+  "pydantic>=2.0.0",
+  "pyyaml>=6.0",
+  "requests>=2.32.3",
+]
+
+[project.optional-dependencies]
+research = ["pytest>=8.0.0"]
+
+[project.scripts]
+pds-research = "pds_research.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+py-modules = ["pds_mcp_server", "utils"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+

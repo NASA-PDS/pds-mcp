@@ -1,0 +1,19 @@
+# Development-only NLQ variants derived from already executable pilot intents.
+# They deliberately hide exact PDS field names, identifiers, and some entity titles.
+variants:
+  pilot-007:
+    question: >-
+      Find New Horizons KEM1 collections containing radio-science observations
+      of Arrokoth.
+    hidden_entity: instrument
+  pilot-010:
+    question: >-
+      Find all PDS collections associated with microscopic imaging by the
+      Opportunity rover on Mars, including data, calibration, documentation,
+      and ancillary collections.
+    hidden_entity: instrument
+  pilot-018:
+    question: >-
+      Find Voyager 2 collections containing cosmic-ray measurements from the
+      Voyager investigation.
+    hidden_entity: instrument

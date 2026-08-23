@@ -1,0 +1,11 @@
+# Copy this only after the pilot architecture decision is recorded.
+# Prices are explicit inputs so historical cost estimates remain reproducible.
+provider: openai
+model_snapshot: null
+input_usd_per_million_tokens: null
+output_usd_per_million_tokens: null
+max_requests: 0
+max_cost_usd: 0
+max_output_tokens: 1200
+store_responses: false
+

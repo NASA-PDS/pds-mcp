@@ -1,129 +1,171 @@
-# NASA PDS Registry MCP Server
+# Agentic Search for the NASA Planetary Data System
 
-A Model Context Protocol (MCP) server that provides access to the NASA Planetary Data System (PDS) Registry API using FastMCP.
+An MCP server and reproducible evaluation of multistep natural-language search
+over the [NASA Planetary Data System (PDS) Registry](https://nasa-pds.github.io/pds-api/).
 
-https://github.com/user-attachments/assets/1d6b7035-c07a-4ca3-8bd2-9c19d68c3d5c
+**[Evaluation](#evaluation-study)** · **[Results](#results)** ·
+**[Benchmark and artifacts](#benchmark-and-reproducibility)** ·
+**[MCP server](#mcp-server)** · **[Development guide](DEVELOPMENT.md)**
 
+## Abstract
 
-## Overview
+The NASA Planetary Data System archives planetary-science data using the PDS4
+information model. Searching the Registry often requires exact ontology field
+names and context identifiers for investigations, targets, instruments, and
+instrument hosts. This repository exposes those operations through a FastMCP
+server so that a language-model agent can resolve PDS entities, construct
+filters, and retrieve matching collections from a natural-language request.
 
-The NASA PDS MCP server enables human-in-the-loop agentic search and exploration of NASA PDS data products, bundles, and collections through a simple interface, directly integrating with the [NASA PDS Registry API](https://nasa-pds.github.io/pds-api/).
+We evaluated whether iterative tool use improves identifier-set retrieval on a
+300-question, query-first benchmark validated against the live PDS Search API.
+Using the same GPT-5.6 Luna model, we compared closed-book generation, access to
+one MCP call, and multistep MCP search. Multistep search achieved **98.02% macro
+F1** and **95.67% exact result-set match**, compared with 12.29% and 8.33% for
+the single-call condition and 0.33% on both metrics without PDS access. These
+results show that iterative entity resolution and tool use were necessary for
+reliable retrieval on this synthetic, live-validated benchmark.
 
-By open-sourcing this MCP server, we aim to support the researchers of the Planetary Data Science community enabling easy access to NASA PDS data for their future research endeavors.
+## Evaluation study
 
-<img width="512" height="322" alt="image" src="https://github.com/user-attachments/assets/55d3b3ce-2ac2-4359-a23f-1b1d55efd648" />
+### Research question
 
-## Features
+Can a language-model agent reliably translate natural-language planetary-data
+requests into complete PDS Registry result sets, and does multistep MCP search
+outperform the same model with one or zero PDS tool calls?
 
-- **Mission & Project Search**: Find space missions, investigations, and research projects with filtering by keywords and mission types
-- **Celestial Body Discovery**: Search for planets, moons, asteroids, comets, and other astronomical targets by name or type
-- **Spacecraft & Platform Search**: Locate spacecraft, rovers, landers, telescopes, and other instrument-carrying platforms
-- **Scientific Instrument Lookup**: Find cameras, spectrometers, detectors, and other scientific instruments used in space missions
-- **Data Collection Exploration**: Search and filter data collections by mission, target, instrument, or spacecraft relationships
-- **Product Relationship Mapping**: Discover connections between missions, targets, instruments, and data products
-- **Detailed Product Information**: Retrieve comprehensive metadata and details for specific PDS products using URN identifiers
-- **Reference Data Access**: Access categorized lists of target types, spacecraft types, instrument types, and mission types for filtering and discovery
+### Benchmark
 
-### Example Conversation
+The benchmark contains 300 independent questions:
 
-1. Which instrument do seismic observations in the PDS?
-2. What is the identifier of the moon in the PDS?
-3. What data is collected from these instruments are targeting the Moon? (include URNs if need be)?
-4. What missions produced these observations?
+- 225 multihop questions with two or three context constraints.
+- 75 single-constraint controls.
+- 294 archive-collection retrieval questions and 6 context lookups.
+- Target sets ranging from 1 to 98 PDS identifiers.
 
-## Installation
+Ground truth was constructed before question answering. Each typed query plan
+was compiled, executed against the live PDS API, fully paginated, and normalized
+to PDS logical identifiers. Natural-language questions were then derived from
+the validated intents. During evaluation, every question ran in an independent
+ephemeral Codex process with no access to other questions or reference answers.
 
-1. Clone this repository:
+### Conditions
+
+| Condition | Model | PDS access | Purpose |
+|---|---|---|---|
+| Closed book | GPT-5.6 Luna | None | Tests whether exact identifiers can be produced from model knowledge alone. |
+| Single-call MCP | GPT-5.6 Luna | At most one live MCP call | Tests whether tool availability without iterative search is sufficient. |
+| Multistep MCP | GPT-5.6 Luna | Iterative live MCP calls | Tests entity resolution, refinement, and collection retrieval. |
+
+Returned identifier sets were scored with macro precision, recall, F1, and
+exact result-set match. F1 awards partial credit for overlap; exact match
+requires the complete returned set to equal the ground-truth set. Failed runs
+and abstentions remain in the denominator.
+
+## Results
+
+![Same-model PDS retrieval performance across closed-book, single-call MCP, and multistep MCP conditions](research/results/figures/pds-performance-comparison.png)
+
+| Condition | Macro precision | Macro recall | Macro F1 | Exact match | Micro F1 | Mean calls | Mean latency |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Closed book | 0.33% | 0.33% | 0.33% | 0.33% | 0.03% | 0.00 | 8.00 s |
+| Single-call MCP | 13.62% | 11.71% | 12.29% | 8.33% | 27.85% | 1.01 | 29.86 s |
+| **Multistep MCP** | **98.18%** | **97.97%** | **98.02%** | **95.67%** | **99.26%** | 5.28 | 47.24 s |
+
+The single-call condition was conservative: it produced few false positives
+but missed most relevant identifiers. Multistep MCP search recovered 6,749 true
+positive identifiers with 8 false positives and 93 false negatives. Across the
+multistep run, the agent used a mean of 5.28 and a median of 5 tool calls per
+question, demonstrating that the evaluated behavior was generally iterative
+rather than a one-call lookup.
+
+## How multistep search works
+
+A request such as:
+
+> Find PDS collections from the New Horizons Kuiper Belt Extended Mission 1,
+> collected by the Radio Science Experiment, targeting Arrokoth.
+
+requires the agent to resolve several ontology objects before retrieving data:
+
+1. Resolve the KEM1 investigation identifier.
+2. Resolve the New Horizons REX instrument identifier.
+3. Resolve Arrokoth and its PDS target identifier.
+4. Search collections using the compatible investigation, instrument, and
+   target constraints.
+5. Return the complete normalized collection-identifier set.
+
+This mirrors the work a user would otherwise perform manually when discovering
+PDS4 context identifiers and exact Registry filters.
+
+## Benchmark and reproducibility
+
+| Artifact | Description |
+|---|---|
+| [`main-300-live.jsonl`](research/data/main-300-live.jsonl) | Questions, typed query plans, API requests, ground-truth identifiers, difficulty labels, and provenance. |
+| [`codex-closed-book-main-300-gpt-5.6-luna.jsonl`](research/results/codex-closed-book-main-300-gpt-5.6-luna.jsonl) | Raw closed-book predictions. |
+| [`codex-live-single-call-main-300-gpt-5.6-luna.jsonl`](research/results/codex-live-single-call-main-300-gpt-5.6-luna.jsonl) | Raw single-call predictions. |
+| [`codex-live-main-300-gpt-5.6-luna.jsonl`](research/results/codex-live-main-300-gpt-5.6-luna.jsonl) | Raw multistep predictions. |
+| [`three-condition-comparison.csv`](research/results/three-condition-comparison.csv) | Graph-ready aggregate comparison. |
+| [`three-condition-comparison.json`](research/results/three-condition-comparison.json) | Machine-readable metrics and resource measurements. |
+| [`tool-call analysis`](research/results/codex-live-main-300-tool-call-analysis.csv) | Multistep hop-count distribution and exact accuracy by call count. |
+
+Recompute identifier-set metrics with:
 
 ```bash
-git clone https://github.com/NASA-PDS/pds-mcp-server.git
-cd pds-mcp-server
+.venv/bin/pds-research score \
+  research/data/main-300-live.jsonl \
+  research/results/codex-live-main-300-gpt-5.6-luna.jsonl
 ```
 
-2. Install dependencies:
+See [DEVELOPMENT.md](DEVELOPMENT.md) for environment setup, server execution,
+MCP client configuration, and test commands.
 
-Requires Python 3.13+.
+## Limitations
 
-```bash
-python3.13 -m venv {env-name}
-source {env-name}/bin/activate
-pip install -r requirements.txt
-```
+- Questions were synthetically derived from executable query plans; the study
+  does not establish usefulness to planetary scientists.
+- The benchmark emphasizes collection retrieval and contains only six direct
+  context-discovery questions.
+- Each condition was run once with one model, so run-to-run and cross-model
+  generalization remain unmeasured.
+- Ground truth captures live Registry behavior at benchmark-construction time;
+  later Registry updates may produce different result sets.
+- Longer trajectories are associated with harder cases or recovery attempts;
+  tool-call count should not be interpreted as a causal performance factor.
 
-## Usage
+## MCP server
 
-### Running the Server Standalone
+The FastMCP server in [`src/pds_mcp_server.py`](src/pds_mcp_server.py) exposes
+live PDS Registry operations for:
 
-If you need to expose the MCP tools as a server, you can run it, standalone, as follows:
+- Investigation, target, instrument-host, and instrument search.
+- Context-product traversal.
+- Collection search by investigation, target, instrument, and host.
+- Detailed product retrieval by PDS identifier.
 
-```bash
-python3.13 pds_mcp_server.py
-```
+The server can be used from Claude Desktop, Cursor, Codex, or another
+MCP-compatible host. Setup instructions are in [DEVELOPMENT.md](DEVELOPMENT.md).
 
-### MCP Client Configuration (Claude Desktop, Cursor, or Custom MCP client)
+## Example research queries
 
-```json
-{
-  "mcpServers": {
-    "pds-registry": {
-      "command": "/path/to/{env-name}/bin/python3.13",
-      "args": ["/path/to/pds_mcp_server.py"],
-      "env": {}
-    }
-  }
-}
-```
+- Find Apollo 17 collections produced by the Lunar Surface Experiments Package
+  Heat Flow Experiment and targeting the Moon.
+- Find InSight collections produced by the Auxiliary Payload Sensor Subsystem
+  temperature and wind sensor and targeting Mars.
+- Find Cassini collections produced by the Imaging Science Subsystem Wide Angle
+  camera and hosted on the Cassini Orbiter.
+- Find New Horizons KEM1 radio-science collections targeting Arrokoth.
 
-## Suggested Instructions
-
-We recommend using these instructions in your MCP Client:
-
-```
-You are only allowed to make one tool call per request. In the returned search results, output the URNs (identifiers) as additional information alongside the result. After each message, you will propose to the user what next steps they can take and ask them to choose.
-```
-
-This creates a human-in-the-loop agentic search conversation: allowing the user to control how they want to search through the NASA Planetary Data System.
-
-Example on how to set up in [Claude Desktop](./Claude_Desktop.md).
-
-## Custom MCP Hosts
-
-To go beyond 3rd party MCP Hosts (Cursor, Claude Desktop, etc.), we have an example of a custom MCP Host built on Gradio UI, HuggingFace smolagents, and the OpenAI SDK. More [here](./src/gradio/README.md).
-
-## Development
-
-### MCP Inspector (Debugging)
-
-```bash
-npx @modelcontextprotocol/inspector python src/main.py
-```
-
-More on MCP Inspector [here](https://modelcontextprotocol.io/legacy/tools/inspector).
-
-### Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-## Dependencies
-
-Requires Python 3.13+. Library dependencies listed in `requirements.txt`.
+These examples are drawn from the released benchmark; the complete set is
+available in [`main-300-live.jsonl`](research/data/main-300-live.jsonl).
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+Code is released under the [MIT License](LICENSE).
 
 ## Support
 
-For issues related to:
+- PDS Registry API: contact `pds-operator@jpl.nasa.gov` or open an issue in the
+  [PDS API repository](https://github.com/NASA-PDS/pds-api).
+- This server and study: open an issue in this repository.
 
-- **PDS Registry API**: Contact pds-operator@jpl.nasa.gov or open an issue [here](https://github.com/NASA-PDS/pds-api)
-- **This MCP Server**: Open an issue in this repository
-- **MCP Protocol**: Check the [MCP documentation](https://modelcontextprotocol.io/) or [FastMCP documentation](https://gofastmcp.com/getting-started/welcome)
-
-## Other Resources
-
-- [PDS API Swagger OAS](https://pds.mcp.nasa.gov/api/search/1/swagger-ui/index.html)

@@ -1,0 +1,28 @@
+target_size: 300
+families:
+  direct_context_lookup: 30
+  descriptive_context_lookup: 30
+  archive_by_investigation: 30
+  archive_by_target: 30
+  archive_by_instrument_or_host: 30
+  combined_context_constraints: 50
+  temporal_science_processing_spatial: 40
+  multi_hop_relationship: 30
+  valid_empty_or_incompatible: 15
+  ambiguous_or_alias_heavy: 15
+
+selectivity:
+  empty: [0, 0]
+  singleton: [1, 1]
+  small: [2, 10]
+  medium: [11, 100]
+  broad: [101, null]
+
+acceptance:
+  require_schema_validation: true
+  require_execution: true
+  require_full_pagination: true
+  reject_duplicate_canonical_plan: true
+  reject_duplicate_result_set: true
+  max_positive_result_count: 100
+

@@ -201,6 +201,17 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 
+# Local research caches and high-volume execution traces
+.DS_Store
+research/data/live-query-cache/
+research/data/snapshots/
+research/data/*-draft.jsonl
+research/data/pilot-*
+research/results/trajectories/
+research/results/*.sandbox-failed.jsonl
+research/literature/
+research/protocol/
+
 # Marimo
 marimo/_static/
 marimo/_lsp/

@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Same-model PDS retrieval performance</title>
+  <desc id="desc">Four bar charts compare closed-book, single-call MCP, and multistep MCP performance on macro precision, macro recall, macro F1, and exact result-set match.</desc>
+  <rect width="1200" height="760" fill="#ffffff"/>
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #172033; }
+    .title { font-size: 25px; font-weight: 600; }
+    .panel-title { font-size: 18px; font-weight: 600; }
+    .axis { font-size: 13px; }
+    .value { font-size: 14px; font-weight: 600; }
+    .grid { stroke: #d8dee9; stroke-width: 1; }
+    .frame { fill: none; stroke: #8892a5; stroke-width: 1; }
+    .closed { fill: #4c78a8; }
+    .single { fill: #f58518; }
+    .multi { fill: #54a24b; }
+  </style>
+  <text class="title" x="600" y="38" text-anchor="middle">Same-model PDS retrieval performance (n = 300)</text>
+  <g transform="translate(250,58)">
+    <rect class="closed" x="0" y="0" width="16" height="16"/><text x="23" y="13" font-size="14">Closed book</text>
+    <rect class="single" x="145" y="0" width="16" height="16"/><text x="168" y="13" font-size="14">Single-call MCP</text>
+    <rect class="multi" x="325" y="0" width="16" height="16"/><text x="348" y="13" font-size="14">Multistep MCP</text>
+  </g>
+
+  <!-- Macro precision -->
+  <g transform="translate(55,100)">
+    <text class="panel-title" x="255" y="0" text-anchor="middle">Macro precision</text>
+    <rect class="frame" x="65" y="25" width="460" height="235"/>
+    <line class="grid" x1="65" y1="260" x2="525" y2="260"/><line class="grid" x1="65" y1="201.25" x2="525" y2="201.25"/>
+    <line class="grid" x1="65" y1="142.5" x2="525" y2="142.5"/><line class="grid" x1="65" y1="83.75" x2="525" y2="83.75"/>
+    <line class="grid" x1="65" y1="25" x2="525" y2="25"/>
+    <text class="axis" x="56" y="264" text-anchor="end">0%</text><text class="axis" x="56" y="205" text-anchor="end">25%</text>
+    <text class="axis" x="56" y="146" text-anchor="end">50%</text><text class="axis" x="56" y="87" text-anchor="end">75%</text><text class="axis" x="56" y="29" text-anchor="end">100%</text>
+    <rect class="closed" x="100" y="259.2" width="90" height="0.8"/><rect class="single" x="230" y="228.0" width="90" height="32.0"/><rect class="multi" x="360" y="29.3" width="90" height="230.7"/>
+    <text class="value" x="145" y="250" text-anchor="middle">0.33%</text><text class="value" x="275" y="219" text-anchor="middle">13.62%</text><text class="value" x="405" y="20" text-anchor="middle">98.18%</text>
+    <text class="axis" x="145" y="282" text-anchor="middle">Closed</text><text class="axis" x="275" y="282" text-anchor="middle">Single-call</text><text class="axis" x="405" y="282" text-anchor="middle">Multistep</text>
+  </g>
+
+  <!-- Macro recall -->
+  <g transform="translate(625,100)">
+    <text class="panel-title" x="255" y="0" text-anchor="middle">Macro recall</text>
+    <rect class="frame" x="65" y="25" width="460" height="235"/>
+    <line class="grid" x1="65" y1="260" x2="525" y2="260"/><line class="grid" x1="65" y1="201.25" x2="525" y2="201.25"/>
+    <line class="grid" x1="65" y1="142.5" x2="525" y2="142.5"/><line class="grid" x1="65" y1="83.75" x2="525" y2="83.75"/>
+    <line class="grid" x1="65" y1="25" x2="525" y2="25"/>
+    <text class="axis" x="56" y="264" text-anchor="end">0%</text><text class="axis" x="56" y="205" text-anchor="end">25%</text>
+    <text class="axis" x="56" y="146" text-anchor="end">50%</text><text class="axis" x="56" y="87" text-anchor="end">75%</text><text class="axis" x="56" y="29" text-anchor="end">100%</text>
+    <rect class="closed" x="100" y="259.2" width="90" height="0.8"/><rect class="single" x="230" y="232.5" width="90" height="27.5"/><rect class="multi" x="360" y="29.8" width="90" height="230.2"/>
+    <text class="value" x="145" y="250" text-anchor="middle">0.33%</text><text class="value" x="275" y="223" text-anchor="middle">11.71%</text><text class="value" x="405" y="20" text-anchor="middle">97.97%</text>
+    <text class="axis" x="145" y="282" text-anchor="middle">Closed</text><text class="axis" x="275" y="282" text-anchor="middle">Single-call</text><text class="axis" x="405" y="282" text-anchor="middle">Multistep</text>
+  </g>
+
+  <!-- Macro F1 -->
+  <g transform="translate(55,440)">
+    <text class="panel-title" x="255" y="0" text-anchor="middle">Macro F1</text>
+    <rect class="frame" x="65" y="25" width="460" height="235"/>
+    <line class="grid" x1="65" y1="260" x2="525" y2="260"/><line class="grid" x1="65" y1="201.25" x2="525" y2="201.25"/>
+    <line class="grid" x1="65" y1="142.5" x2="525" y2="142.5"/><line class="grid" x1="65" y1="83.75" x2="525" y2="83.75"/>
+    <line class="grid" x1="65" y1="25" x2="525" y2="25"/>
+    <text class="axis" x="56" y="264" text-anchor="end">0%</text><text class="axis" x="56" y="205" text-anchor="end">25%</text>
+    <text class="axis" x="56" y="146" text-anchor="end">50%</text><text class="axis" x="56" y="87" text-anchor="end">75%</text><text class="axis" x="56" y="29" text-anchor="end">100%</text>
+    <rect class="closed" x="100" y="259.2" width="90" height="0.8"/><rect class="single" x="230" y="231.1" width="90" height="28.9"/><rect class="multi" x="360" y="29.7" width="90" height="230.3"/>
+    <text class="value" x="145" y="250" text-anchor="middle">0.33%</text><text class="value" x="275" y="222" text-anchor="middle">12.29%</text><text class="value" x="405" y="20" text-anchor="middle">98.02%</text>
+    <text class="axis" x="145" y="282" text-anchor="middle">Closed</text><text class="axis" x="275" y="282" text-anchor="middle">Single-call</text><text class="axis" x="405" y="282" text-anchor="middle">Multistep</text>
+  </g>
+
+  <!-- Exact match -->
+  <g transform="translate(625,440)">
+    <text class="panel-title" x="255" y="0" text-anchor="middle">Exact result-set match</text>
+    <rect class="frame" x="65" y="25" width="460" height="235"/>
+    <line class="grid" x1="65" y1="260" x2="525" y2="260"/><line class="grid" x1="65" y1="201.25" x2="525" y2="201.25"/>
+    <line class="grid" x1="65" y1="142.5" x2="525" y2="142.5"/><line class="grid" x1="65" y1="83.75" x2="525" y2="83.75"/>
+    <line class="grid" x1="65" y1="25" x2="525" y2="25"/>
+    <text class="axis" x="56" y="264" text-anchor="end">0%</text><text class="axis" x="56" y="205" text-anchor="end">25%</text>
+    <text class="axis" x="56" y="146" text-anchor="end">50%</text><text class="axis" x="56" y="87" text-anchor="end">75%</text><text class="axis" x="56" y="29" text-anchor="end">100%</text>
+    <rect class="closed" x="100" y="259.2" width="90" height="0.8"/><rect class="single" x="230" y="240.4" width="90" height="19.6"/><rect class="multi" x="360" y="35.2" width="90" height="224.8"/>
+    <text class="value" x="145" y="250" text-anchor="middle">0.33%</text><text class="value" x="275" y="231" text-anchor="middle">8.33%</text><text class="value" x="405" y="26" text-anchor="middle">95.67%</text>
+    <text class="axis" x="145" y="282" text-anchor="middle">Closed</text><text class="axis" x="275" y="282" text-anchor="middle">Single-call</text><text class="axis" x="405" y="282" text-anchor="middle">Multistep</text>
+  </g>
+</svg>
