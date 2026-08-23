@@ -73,35 +73,41 @@ Thus, the job of the agent run on the benchmark is to use the NLQ to build a PDS
 
 ![Same-model PDS retrieval performance across baseline, single-call MCP, and multistep MCP conditions](research/results/figures/pds-performance-comparison.png)
 
-| Condition | Macro precision | Macro recall | Macro F1 | Exact match | Micro F1 | Mean calls | Mean latency |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| Baseline | 0.33% | 0.33% | 0.33% | 0.33% | 0.03% | 0.00 | 8.00 s |
-| Single-call MCP | 13.62% | 11.71% | 12.29% | 8.33% | 27.85% | 1.01 | 29.86 s |
-| **Multistep MCP (ours)** | **98.18%** | **97.97%** | **98.02%** | **95.67%** | **99.26%** | 5.28 | 47.24 s |
+| Condition | Macro precision | Macro recall | Macro F1 | Exact match | Mean calls | Mean latency |
+|---|---:|---:|---:|---:|---:|---:|
+| Baseline | 0.33% | 0.33% | 0.33% | 0.33% | 0.00 | 8.00 s |
+| Single-call MCP | 13.62% | 11.71% | 12.29% | 8.33% | 1.01 | 29.86 s |
+| **Multistep MCP (ours)** | **98.18%** | **97.97%** | **98.02%** | **95.67%** | 5.28 | 47.24 s |
 
-### Performance by difficulty
+### Diagnostic analyses
 
-![Full multistep MCP system macro F1 and exact match by question reasoning depth and constraint count](research/results/figures/pds-performance-by-difficulty.png)
-For multistep MCP system, performance remained high when
-the full agent answered both single-constraint and multihop questions.
-Two-constraint requests achieved the highest exact-match rate at 98.2%; the
-three-constraint subset achieved 94.7%.
-
-### Retrieval errors
-
-![False-positive and false-negative PDS identifiers across the three evaluation conditions](research/results/figures/pds-retrieval-errors.png)
-
-The baseline and single-call conditions primarily failed by omitting relevant
-identifiers. Multistep MCP reduced false negatives from 5,731 in the single-call
-condition to 93 while producing only 8 false positives.
-
-### Agent trajectory length
-
-![Distribution of PDS tool calls and exact-match rate in the multistep MCP condition](research/results/figures/pds-tool-call-distribution.png)
-
-Most questions required between three and seven tool calls, with a median of
-five. Exact-match rates at high call counts should be interpreted cautiously
-because those groups are small and often contain harder or recovery-heavy runs.
+<table>
+  <tr>
+    <td width="50%">
+      <img src="research/results/figures/pds-performance-by-difficulty.png" alt="Full multistep MCP system performance by question difficulty">
+      <br><strong>Performance by difficulty.</strong> The full multistep system
+      remained reliable across single-constraint and multihop questions.
+    </td>
+    <td width="50%">
+      <img src="research/results/figures/pds-retrieval-errors.png" alt="False-positive and false-negative identifiers across conditions">
+      <br><strong>Retrieval errors.</strong> Multistep MCP reduced false negatives
+      from 5,731 to 93 while producing only 8 false positives.
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src="research/results/figures/pds-tool-call-distribution.png" alt="PDS tool-call distribution and exact-match rate">
+      <br><strong>Agent trajectory length.</strong> Most questions required three
+      to seven tool calls, with a median of five.
+    </td>
+    <td width="50%" valign="top">
+      <strong>Key observations</strong><br><br>
+      The baseline and single-call systems primarily
+      failed by omitting relevant identifiers. Results at high tool-call counts
+      represent small, often harder or recovery-heavy groups.
+    </td>
+  </tr>
+</table>
 
 
 ## How multistep search works
